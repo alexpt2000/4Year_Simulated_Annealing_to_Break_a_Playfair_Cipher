@@ -1,5 +1,5 @@
 
-package ie.gmit.sw.ai;
+package ie.gmit.sw.ai.file;
 import java.io.*;
 import java.util.*;
 import java.nio.file.Files;
@@ -28,8 +28,11 @@ public class Parser {
 		List<String> plainText = new ArrayList<>();
 		// Read all lines replace all lower alphabet characters to Upper
 		// Characters with no whitespace.
-		reader.lines().forEach((line) -> plainText.add(line.replaceAll("[^a-zA-Z]", "").toUpperCase()));
-
+		
+		//reader.lines().forEach((line) -> plainText.add(line.replaceAll("[^A-Za-z0-9 ]", "").toUpperCase()));
+		
+		reader.lines().forEach((line) -> plainText.add(line.toUpperCase().replaceAll("[^A-Za-z0-9 ]", "")));
+		
 		return new ArrayList<>(plainText);
 	}
 

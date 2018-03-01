@@ -1,5 +1,5 @@
 
-package ie.gmit.sw.ai;
+package ie.gmit.sw.ai.cipher;
 
 /*
  * This public class state the functionality of the PortaCipher. 

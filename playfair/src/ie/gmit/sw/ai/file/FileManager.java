@@ -1,4 +1,4 @@
-package ie.gmit.sw.ai;
+package ie.gmit.sw.ai.file;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -7,6 +7,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.List;
+
+import ie.gmit.sw.ai.cipher.PortaCipher;
+
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -50,11 +53,11 @@ public class FileManager {
 		try {
 			new FileOutputStream(fileName, false).close();
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 
 		try (PrintWriter pw = new PrintWriter(path)) {
+			
 			PortaCipher porta = new PortaCipher();// Instantiate PortaCipher.
 			encryptText.forEach((line) -> pw.println(porta.decrypt(keyword, line)));
 
@@ -94,7 +97,6 @@ public class FileManager {
 
 		try (PrintWriter pw = new PrintWriter(path)) {
 			PortaCipher porta = new PortaCipher();// instantiate PortaCipher
-
 			plainText.forEach((line) -> pw.println(porta.encrypt(keyword, line)));// print encrypted text plain for
 																					// each.
 
@@ -128,7 +130,6 @@ public class FileManager {
 						}
 
 					} catch (MalformedURLException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 
@@ -143,7 +144,6 @@ public class FileManager {
 							keepRunningEncDec = false;
 						}
 					} catch (Exception e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				}
