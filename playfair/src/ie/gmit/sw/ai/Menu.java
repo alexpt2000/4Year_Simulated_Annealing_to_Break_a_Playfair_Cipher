@@ -7,6 +7,9 @@ import java.util.concurrent.TimeUnit;
 
 import ie.gmit.sw.ai.file.FileManager;
 import ie.gmit.sw.ai.file.Parser;
+import ie.gmit.sw.ai.playfair.Playfair;
+import ie.gmit.sw.ai.playfair.PlayfairKey;
+import ie.gmit.sw.ai.playfair.SimulatedAnnealing;
 
 // This class shows the menu options.
 public class Menu {
@@ -51,6 +54,33 @@ public class Menu {
 					
 
 					// FileManager.EncriptParsingFile(file, keyword);
+					
+					Playfair sol = new Playfair("");
+					
+					//Double
+					// SimulatedAnnealing sa = new SimulatedAnnealing(10, 0.1, 10000);
+					
+					//Quadri
+					SimulatedAnnealing sa = new SimulatedAnnealing(10, 0.1, 50000);
+					
+					
+					String cipherText = "HFZQLYVEDWNITIQPQDUVHYLGXZHFNYBKPACAZQHFVQIQCUUVYCBXABQZQZURHQDZHBKDMVZQHXRGURLQHTXZQVDFYXZHRGGWHBYEGXNYYEGKYVHFLQDBWDVQIZEAUCAHHPQIBRRVBREZNYYQAHPUQDUVHYZXGNRDEOZWQFKCLZZHXVRDEOFEINQZZKZPKDYDCAMEEQUDBCLDBKPAEDUVYCHFZQQEUMSVPBUMURLQHTXZXZCUHTVTPHMDLDRGMDLDVBHCMGUVYCQVPVDMSZXQCPDIQZLQKDUBEMTCYDDBCQGDFEUKQZVPCYUHKDIABDFVFEETGKIDOZEFURLQUVYCKDPTACYQUCFUPVVBBREZZXDTZPWCMEDILYTHZHADMUDBGQHBKIFEMDEWIZRGVQHTKCNWIEGNHCPLLUDPCOFTQGDPNWBYHCHFQZITQVGKUVYCHFBDQVHVHCHFDIYXHFBRUMLZKDZDFQFHNYLGSAPLQCCAZQHCPCBODITCVBMUHFDIYXHFBRUMLZKDLULIDLIDDLQRKWZQACYQUZBHZBDUBHQZUKUZEDGWTVBXABQZQZBUFEUFFTQVEKZQINAHMEPTDFNYFBIZEXBRRVBREZTCILEVFBEDHUBRWDLYTHFHIZNYCPOVBDLIZQHFQPQDUVHYLGCUNYOKDMPCHTXZPCGCHFDYLQDBLTHPQEKCGKTIQIBRVQHBQNDBRXBZEFRFVUEDQYNYMZCPBDHYLKCUXF";
+					
+					System.out.println("Solution is on: " + sa.getFitness(cipherText, sol));
+					
+					PlayfairKey key = sa.findKey(cipherText);
+					Playfair pf = new Playfair(key);
+					String plainText = pf.decrypt(cipherText);
+					
+					
+					System.out.println(plainText);
+					
+					
+					
+					
+					
+					
+					
 
 					System.out.println("\nBreak decrypt is Finish...");
 					System.out.println("\nPress ENTER to return to Main Menu...");
