@@ -17,7 +17,6 @@ public class SimulatedAnnealing {
 		String candidate = playfair.decrypt(cipherText);
 
 		return QuadgramFrequencyRepository.getInstance().getTextFitness(candidate);
-		// return BigramFrequencyRepository.getInstance().getTextFitness(candidate);
 	}
 
 	public PlayfairKey findKey(String cipherText) {
@@ -28,21 +27,32 @@ public class SimulatedAnnealing {
 		Playfair playfair = new Playfair(parent);
 		double parentFitness = getFitness(cipherText, playfair);
 
+		String progressBar = "";
+		
 		for (double temp = maxTemp; temp > 0; temp -= step) {
-			System.out.println(temp);
-			System.out.println(parentFitness);
-			// System.out.println(parent);
+
+			progressBar += "#";
+			
+			System.out.print(progressBar);
+			
+//			System.out.print(temp);
+//			System.out.print(parentFitness);
+//			System.out.print(parent);
+			
 			for (int it = 0; it < iterationsOnTemp; it++) {
+				
 				PlayfairKey child = parent.makeChildKey();
 				playfair.setKey(child);
 				double childFitness = getFitness(cipherText, playfair);
 				double df = childFitness - parentFitness;
 				boolean takeChild = false;
+				
 				if (df > 0)
 					takeChild = true;
 				else if (Math.random() < Math.exp(df / temp))
 					takeChild = true;
 				if (takeChild) {
+					
 					parentFitness = childFitness;
 					parent = child;
 				}

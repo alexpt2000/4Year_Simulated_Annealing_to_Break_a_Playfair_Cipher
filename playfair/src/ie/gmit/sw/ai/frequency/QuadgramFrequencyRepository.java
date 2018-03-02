@@ -4,7 +4,7 @@ import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.Map;
 
-import ie.gmit.sw.ai.playfair.FrequencyParser;
+import ie.gmit.sw.ai.file.Parser;
 import ie.gmit.sw.ai.playfair.TextUtils;
 
 public class QuadgramFrequencyRepository implements FrequencyRepository {
@@ -21,7 +21,7 @@ public class QuadgramFrequencyRepository implements FrequencyRepository {
 
 	private QuadgramFrequencyRepository() {
 		try {
-			Map<String, Double> frequencies = FrequencyParser.getQuadgramFrequencies();
+			Map<String, Double> frequencies = Parser.getQuadgramFrequencies();
 			scores = new HashMap<String, Double>();
 			for (Map.Entry<String, Double> entry : frequencies.entrySet()) {
 				double val = Math.log(entry.getValue());
