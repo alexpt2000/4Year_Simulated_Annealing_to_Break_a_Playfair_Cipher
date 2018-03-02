@@ -10,7 +10,6 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import ie.gmit.sw.ai.cipher.PortaCipher;
 import ie.gmit.sw.ai.playfair.Playfair;
 import ie.gmit.sw.ai.playfair.PlayfairKey;
 import ie.gmit.sw.ai.playfair.SimulatedAnnealing;
@@ -54,7 +53,11 @@ public class FileManager {
 		Playfair playFair = new Playfair(key);
 		String plainText = playFair.decrypt(encryptText);
 
-		System.out.println(plainText);
+		System.out.println(
+				"\n------------------------------------------------------------------------------------------");
+		System.out.println("Sample output result.: " + plainText.substring(0, 60) + "...");
+		System.out
+				.println("------------------------------------------------------------------------------------------");
 
 		// File Name
 		String fileName = "decryptedMSG.txt";
@@ -71,8 +74,8 @@ public class FileManager {
 		try (PrintWriter pw = new PrintWriter(path)) {
 			// Print into a file
 			pw.println(plainText);
-			System.out.println("\nDecrypt saved on file name: " + fileName);
-			
+			System.out.println("Decrypt saved on file name: " + fileName);
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -96,7 +99,7 @@ public class FileManager {
 
 		try (PrintWriter pw = new PrintWriter(path)) {
 
-			PortaCipher porta = new PortaCipher();// Instantiate PortaCipher.
+			// PortaCipher porta = new PortaCipher();// Instantiate PortaCipher.
 			// encryptText.forEach((line) -> pw.println(porta.decrypt(keyword, line)));
 
 		} catch (IOException e) {
@@ -123,6 +126,8 @@ public class FileManager {
 
 		plainText = parser.parse();
 
+		Playfair playfair = new Playfair(keyword);
+
 		// Declare variable
 		String fileName = "encryptedMSG.txt";
 		path = "./" + fileName;
@@ -134,12 +139,8 @@ public class FileManager {
 		}
 
 		try (PrintWriter pw = new PrintWriter(path)) {
-			PortaCipher porta = new PortaCipher();// instantiate PortaCipher
 
-			// TODO - Change the loop
-			// plainText.forEach((line) -> pw.println(porta.encrypt(keyword, line)));//
-			// print encrypted text plain for
-			// each.
+			pw.println(playfair.encrypt(plainText));
 
 		} catch (IOException e) {
 			e.printStackTrace();

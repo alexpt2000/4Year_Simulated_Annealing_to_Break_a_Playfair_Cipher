@@ -18,6 +18,7 @@ public class TextUtils {
 		}
 		return sb.toString();
 	}
+	
 	public static String prepareText(String s)
 	{
 		StringBuilder sb = new StringBuilder();
@@ -38,6 +39,7 @@ public class TextUtils {
 		if (sb.length()%2!=0) sb.append(PlayfairConstants.INSERT_BETWEEN_SAME);
 		return sb.toString();
 	}
+	
 	public static List<String> getDigraphs(String s)
 	{
 		List<String> toReturn = new ArrayList<String>();
@@ -46,11 +48,12 @@ public class TextUtils {
 		
 		return toReturn;
 	}
+	
 	public static void printPairs(String s)
 	{
 		if (s.length()%2!=0) throw new IllegalStateException("Length of string needs to be even");
 		StringBuilder sb = new StringBuilder();
 		for (int i=0;i<s.length();i+=2) sb.append(s.substring(i, i+2)+" ");
-		System.out.println(sb.toString());
+		// System.out.println(sb.toString());
 	}
 }

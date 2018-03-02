@@ -27,13 +27,17 @@ public class SimulatedAnnealing {
 		Playfair playfair = new Playfair(parent);
 		double parentFitness = getFitness(cipherText, playfair);
 
-		String progressBar = "";
+		int progressBar = 0;
 		
 		for (double temp = maxTemp; temp > 0; temp -= step) {
 
-			progressBar += "#";
+			progressBar += 2;
 			
-			System.out.print(progressBar);
+			if(progressBar % 3 == 0) {
+				System.out.print(progressBar + "% ");
+				
+			}
+
 			
 //			System.out.print(temp);
 //			System.out.print(parentFitness);

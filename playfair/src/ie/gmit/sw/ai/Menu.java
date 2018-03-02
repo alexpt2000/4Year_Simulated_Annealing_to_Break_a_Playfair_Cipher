@@ -52,34 +52,18 @@ public class Menu {
 
 					FileManager.ForceDecriptParsingFile(file);
 
-					System.out.println("\nBreak decrypt is Finish...");
+					System.out.println("Break decrypt is Finish...");
 					System.out.println("\nPress ENTER to return to Main Menu...");
 					System.in.read();
 
 					keepRunningEncDec = false;
+					
+					
+
 
 				} else if (selection == 2) {
 
-					System.out.println("\nEnter the keyword  to Encript or EXIT leave.");
-					keyword = in.next().toUpperCase();
-					// Checks if keyword is EXIT will clear console and will print good bye.
-					if (keyword.contains("EXIT")) {
-						clearConsole();
-						System.out.println("\nGood Bye..");
-						System.exit(0);
-					}
-
-					FileManager.EncriptParsingFile(file, keyword);
-
-					System.out.println("\nEncript is Finish...");
-					System.out.println("\nPress ENTER to return to Main Menu...");
-					System.in.read();
-
-					keepRunningEncDec = false;
-
-				} else if (selection == 3) { // if user select ==2 the method will execute Decrypt.
-
-					System.out.println("\nEnter the keyword  to Decript or EXIT leave.");
+					System.out.println("\nEnter the keyword to Decrypt or EXIT leave.");
 					keyword = in.next().toUpperCase();
 					// Checks if keyword is EXIT will clear console and will print good bye.
 					if (keyword.contains("EXIT")) {
@@ -91,6 +75,33 @@ public class Menu {
 					FileManager.DecriptParsingFile(file, keyword);
 
 					System.out.println("\nDecrypt is Finish...");
+					System.out.println("\nPress ENTER to return to Main Menu...");
+					System.in.read();
+
+					keepRunningEncDec = false;
+					
+					
+
+
+				} else if (selection == 3) { // if user select ==2 the method will execute Decrypt.
+
+					
+					System.out.println("\nEnter the keyword to Encrypt or EXIT leave.");
+					keyword = in.next().toUpperCase();
+					// Checks if keyword is EXIT will clear console and will print good bye.
+					if (keyword.contains("EXIT")) {
+						clearConsole();
+						System.out.println("\nGood Bye..");
+						System.exit(0);
+					}
+					
+					
+
+					
+
+					FileManager.EncriptParsingFile(file, keyword);
+
+					System.out.println("\nEncrypt is Finish...");
 					System.out.println("\nPress ENTER to return to Main Menu...");
 					System.in.read();
 
@@ -146,13 +157,13 @@ public class Menu {
 	private void showOptionsEncDec() {
 
 		System.out.println("\n---------------------------------");
-		System.out.println("Decript or Encript");
+		System.out.println("Decrypt or Encrypt");
 		System.out.println("---------------------------------");
 
-		System.out.println("\n(1) Decript file (Break KEY).");
-		System.out.println("(2) Decript file (with KEY).");
-		System.out.println("(3) Encript file.");
-		System.out.println("(4) Return to main menu.");
+		System.out.println("\n(1) Decrypt file (Break KEY).");
+		System.out.println("(2) Decrypt file (With KEY).");
+		System.out.println("(3) Encrypt file.");
+		System.out.println("\n(4) Return to main menu.");
 	}
 
 	// method to clear console

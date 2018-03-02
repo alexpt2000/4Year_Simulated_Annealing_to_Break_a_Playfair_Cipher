@@ -111,7 +111,7 @@ public class Parser {
 	}
 
 	public static Map<String, Double> getQuadgramFrequencies() throws FileNotFoundException {
-		return getFrequencies("english_quadgrams.txt");
+		return getFrequencies("4grams.txt");
 	}
 
 }
