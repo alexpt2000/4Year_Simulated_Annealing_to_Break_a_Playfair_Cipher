@@ -112,7 +112,7 @@ public class Menu {
 		clearConsole();
 		showLogo();
 
-		System.out.println("\n---------------------------------");
+		System.out.println("---------------------------------");
 		System.out.println("    Files Availables");
 		System.out.println("---------------------------------");
 
@@ -174,9 +174,16 @@ public class Menu {
 	 * Show logo.
 	 */
 	public void showLogo() {
-		System.out.println("\n ---------------------------------------------------");
-		System.out.println("|   Simulated Annealing to Break a Playfair Cipher  |");
-		System.out.println(" ---------------------------------------------------");
+		
+		System.out.println("  _____   _______                 _____    __   __   _______  _______ ");
+		System.out.println(" (_____) (_______)               (_____)  (__)_(__) (_______)(__ _ __)");
+		System.out.println("(_)___(_)   (_)       ______    (_)  ___ (_) (_) (_)   (_)      (_)");   
+		System.out.println("(_______)   (_)      (______)   (_) (___)(_) (_) (_)   (_)      (_) ");  
+		System.out.println("(_)   (_) __(_)__               (_)___(_)(_)     (_) __(_)__    (_)");   
+		System.out.println("(_)   (_)(_______)               (_____) (_)     (_)(_______)   (_)");   
+		System.out.println("\nSimulated Annealing to Break a Playfair Cipher");
+//		System.out.println(" by Alexander Souza - G00317835@gmit.ie");
+		
 	}
 
 }
