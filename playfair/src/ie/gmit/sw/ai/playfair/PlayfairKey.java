@@ -8,12 +8,27 @@ import java.util.Random;
 import java.util.Set;
 import java.util.TreeSet;
 
+/**
+ * The Class PlayfairKey.
+ * 
+ * Ref.
+ * http://www.cs.trincoll.edu/~crypto/hcryptoj/docs1.3/hcrypto/engines/PlayfairKey.html
+ * http://www.comscigate.com/HW/cs201/odd_solns/Ch16/ExP16_5/PlayfairCipher.java
+ * 
+ * 
+ * @author Alexander Souza
+ */
 public class PlayfairKey {
 
 	private char matrix[];
 
 	private Map<Character, Integer> charToIndex;
 
+	/**
+	 * Instantiates a new playfair key.
+	 *
+	 * @param key the key
+	 */
 	public PlayfairKey(String key) {
 		key = TextUtils.prepareKey(key);
 		Set<Character> available = new TreeSet<Character>();
@@ -34,6 +49,11 @@ public class PlayfairKey {
 		populateCharToIndexMap();
 	}
 
+	/**
+	 * Instantiates a new playfair key.
+	 *
+	 * @param matrix the matrix
+	 */
 	public PlayfairKey(char matrix[]) {
 		if (matrix.length != 25)
 			throw new IllegalArgumentException("The size of the matrix must be 25");
@@ -56,6 +76,12 @@ public class PlayfairKey {
 		return charToIndex.get(c);
 	}
 
+	/**
+	 * Encrypt.
+	 *
+	 * @param in the in
+	 * @return the string
+	 */
 	// ecrypts digraph
 	public String encrypt(String in) {
 		StringBuilder sb = new StringBuilder();
@@ -94,6 +120,12 @@ public class PlayfairKey {
 		return sb.toString();
 	}
 
+	/**
+	 * Decrypt.
+	 *
+	 * @param in the in
+	 * @return the string
+	 */
 	// decrypts digraph
 	public String decrypt(String in) {
 		if (in.length() != 2)
@@ -142,6 +174,9 @@ public class PlayfairKey {
 		return sb.toString();
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
@@ -156,6 +191,11 @@ public class PlayfairKey {
 		return sb.toString();
 	}
 
+	/**
+	 * Gets the random key.
+	 *
+	 * @return the random key
+	 */
 	public static PlayfairKey getRandomKey() {
 		ArrayList<Character> chars = new ArrayList<Character>();
 		for (char i = 'A'; i <= 'Z'; i++)
@@ -168,6 +208,11 @@ public class PlayfairKey {
 		return new PlayfairKey(carray);
 	}
 
+	/**
+	 * Make child key.
+	 *
+	 * @return the playfair key
+	 */
 	public PlayfairKey makeChildKey() {
 
 		char[] newMatrix = matrix.clone();

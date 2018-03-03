@@ -7,10 +7,18 @@ import java.util.Map;
 import ie.gmit.sw.ai.file.Parser;
 import ie.gmit.sw.ai.playfair.TextUtils;
 
-public class QuadgramFrequencyRepository  {
+/**
+ * The Class QuadgramFrequencyRepository.
+ */
+public class QuadgramFrequencyRepository {
 	private double minValue = Double.POSITIVE_INFINITY;
 	private static QuadgramFrequencyRepository instance;
 
+	/**
+	 * Gets the single instance of QuadgramFrequencyRepository.
+	 *
+	 * @return single instance of QuadgramFrequencyRepository
+	 */
 	public static QuadgramFrequencyRepository getInstance() {
 		if (instance == null)
 			instance = new QuadgramFrequencyRepository();
@@ -29,19 +37,27 @@ public class QuadgramFrequencyRepository  {
 				if (minValue > val)
 					minValue = val;
 			}
-			// System.out.println(minValue);
-			// System.out.println(scores);
+
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
 	}
 
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 */
 	public static void main(String[] args) {
 		getInstance();
 	}
 
-
-	
+	/**
+	 * Gets the text fitness.
+	 *
+	 * @param text the text
+	 * @return the text fitness
+	 */
 	public double getTextFitness(String text) {
 		double result = 0;
 		String preptext = TextUtils.prepareText(text);

@@ -1,10 +1,8 @@
 package ie.gmit.sw.ai.file;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -14,26 +12,31 @@ import ie.gmit.sw.ai.playfair.Playfair;
 import ie.gmit.sw.ai.playfair.PlayfairKey;
 import ie.gmit.sw.ai.playfair.SimulatedAnnealing;
 
+/**
+ * The Class FileManager.
+ */
 public class FileManager {
 
 	private static Parser parser = null;
-	// Variables Global
 	private static String plainText;
 	private static String encryptText;
-
 	private static String path;
 
-	// private void list files on the screen
+	/**
+	 * List files screen.
+	 *
+	 * @return the string
+	 */
 	public static String listFilesScreen() {
 
 		String menu = "";
 
-		File folder = new File("./");// instantiate object
-		File[] listOfFiles = folder.listFiles();// instantiate object
+		File folder = new File("./");
+		File[] listOfFiles = folder.listFiles();
 
 		for (File file : listOfFiles) {
-			if (file.isFile()) {// verify if new file is a file and will print
-								// name of file.
+			if (file.isFile()) {
+
 				menu += "\n" + file.getName();
 			}
 		}
@@ -41,10 +44,15 @@ public class FileManager {
 		return menu;
 	}
 
-	// private void calls decriptParsingFile.
-	public static void ForceDecriptParsingFile(String file) throws IOException, InterruptedException {
-		parser = Parser.getParser(new File(file));// give the name of the file
-													// in its directory
+	/**
+	 * Force decrypt parsing file.
+	 *
+	 * @param file the file
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws InterruptedException the interrupted exception
+	 */
+	public static void ForceDecryptParsingFile(String file) throws IOException, InterruptedException {
+		parser = Parser.getParserFile(new File(file));
 		encryptText = parser.parse();
 
 		SimulatedAnnealing simulatedAnnealing = new SimulatedAnnealing(50, 1, 5000);
@@ -59,10 +67,7 @@ public class FileManager {
 		System.out
 				.println("------------------------------------------------------------------------------------------");
 
-		// File Name
-		String fileName = "decryptedMSG.txt";
-
-		// Set Path
+		String fileName = "_decryptedMSG.txt";
 		path = "./" + fileName;
 
 		try {
@@ -82,13 +87,21 @@ public class FileManager {
 
 	}
 
-	// private void calls decriptParsingFile.
-	public static void DecriptParsingFile(String file, String keyword) throws IOException, InterruptedException {
-		parser = Parser.getParser(new File(file));// give the name of the file
-													// in its directory
+	/**
+	 * Decrypt parsing file.
+	 *
+	 * @param file the file
+	 * @param keyword the keyword
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws InterruptedException the interrupted exception
+	 */
+	public static void DecryptParsingFile(String file, String keyword) throws IOException, InterruptedException {
+		parser = Parser.getParserFile(new File(file));
 		encryptText = parser.parse();
 
-		String fileName = "decryptedMSG.txt";
+		Playfair playfair = new Playfair(keyword);
+
+		String fileName = "_decryptedMSG.txt";
 		path = "./" + fileName;
 
 		try {
@@ -99,29 +112,35 @@ public class FileManager {
 
 		try (PrintWriter pw = new PrintWriter(path)) {
 
-			// PortaCipher porta = new PortaCipher();// Instantiate PortaCipher.
-			// encryptText.forEach((line) -> pw.println(porta.decrypt(keyword, line)));
-
+			pw.println(playfair.encrypt(encryptText));
+			System.out.println("Decrypt saved on file name: " + fileName);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
 	}
 
-	// private void calls Encrypt parsing file.
-	public static void EncriptParsingFile(String file, String keyword) throws IOException, InterruptedException {
+	/**
+	 * Encrypt parsing file.
+	 *
+	 * @param file the file
+	 * @param keyword the keyword
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws InterruptedException the interrupted exception
+	 */
+	public static void EncryptParsingFile(String file, String keyword) throws IOException, InterruptedException {
 
 		if (file.contains("http://") || file.contains("https://")) {
 
-			URL connection = new URL(file);
+			// URL connection = new URL(file);
 
-			// open the URL stream, wrap it an a few "readers"
-			BufferedReader br = new BufferedReader(new InputStreamReader(connection.openStream()));
+			// BufferedReader br = new BufferedReader(new
+			// InputStreamReader(connection.openStream()));
 
-			parser = Parser.getParser(new URL(file));
+			parser = Parser.getParserURL(new URL(file));
 
 		} else {
-			parser = Parser.getParser(new File(file));
+			parser = Parser.getParserFile(new File(file));
 		}
 
 		plainText = parser.parse();
@@ -129,7 +148,7 @@ public class FileManager {
 		Playfair playfair = new Playfair(keyword);
 
 		// Declare variable
-		String fileName = "encryptedMSG.txt";
+		String fileName = "_encryptedMSG.txt";
 		path = "./" + fileName;
 
 		try {
@@ -139,8 +158,8 @@ public class FileManager {
 		}
 
 		try (PrintWriter pw = new PrintWriter(path)) {
-
 			pw.println(playfair.encrypt(plainText));
+			System.out.println("Encrypt saved on file name: " + fileName);
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -148,6 +167,13 @@ public class FileManager {
 
 	}
 
+	/**
+	 * Validate file.
+	 *
+	 * @param file the file
+	 * @return the boolean
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public static Boolean validateFile(String file) throws IOException {
 
 		boolean keepRunningEncDec = true;
@@ -164,9 +190,7 @@ public class FileManager {
 				int responseCode = huc.getResponseCode();
 
 				if (responseCode != 404) {// Verify if the link exist or not
-
 				} else {
-
 					keepRunningEncDec = false;
 				}
 
@@ -181,7 +205,6 @@ public class FileManager {
 			try {
 				File pathToFile = new File(file);
 				if (!pathToFile.exists()) {
-
 					keepRunningEncDec = false;
 				}
 			} catch (Exception e) {

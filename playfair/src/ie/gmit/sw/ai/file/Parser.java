@@ -1,14 +1,26 @@
 
 package ie.gmit.sw.ai.file;
-import java.io.*;
-import java.util.*;
-import java.util.concurrent.TimeUnit;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
 
 
+/**
+ * The Class Parser.
+ */
 //This class parse text and uses BufferedReader to read what it is inside the file.
 public class Parser {
 
@@ -19,6 +31,13 @@ public class Parser {
 	}
 
 	// This method tries bring back text from the source and store this text
+	/**
+	 * Parses the.
+	 *
+	 * @return the string
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws InterruptedException the interrupted exception
+	 */
 	// into List<String>
 	public String parse() throws IOException, InterruptedException {
 
@@ -27,35 +46,25 @@ public class Parser {
 			new IllegalArgumentException("Empty file");
 		}
 
-		//String plainText = "";
-		// Read all lines replace all lower alphabet characters to Upper
-		// Characters with no whitespace.
-		
-		//reader.lines().forEach((line) -> plainText.add(line.replaceAll("[^A-Za-z0-9 ]", "").toUpperCase()));
-		
-		//reader.lines().forEach((line) -> plainText.add(line.toUpperCase().replaceAll("[^A-Za-z0-9 ]", "")));
-		
-		
-		  //BufferedReader bufferedReader = new BufferedReader(new FileReader("readme.txt"));
-		  
-		  StringBuffer stringBuffer = new StringBuffer();
-		  String line = null;
-		 
-		  while((line = reader.readLine())!=null){
-		 
-			  stringBuffer.append(line.toUpperCase().replaceAll("[^A-Za-z0-9 ]", ""));
-		  }
-		   
-//		  System.out.println(stringBuffer);
-//		  TimeUnit.SECONDS.sleep(10);
-		
+		StringBuffer stringBuffer = new StringBuffer();
+		String line = null;
 
-		
+		while ((line = reader.readLine()) != null) {
+
+			stringBuffer.append(line.toUpperCase().replaceAll("[^A-Za-z0-9 ]", ""));
+		}
+
 		return new String(stringBuffer);
 	}
 
+	/**
+	 * Gets the parser file.
+	 *
+	 * @param source the source
+	 * @return the parser file
+	 */
 	// public static parser call back File from source.
-	public static Parser getParser(File source) {
+	public static Parser getParserFile(File source) {
 
 		if (!source.exists()) {
 			throw new IllegalArgumentException("File not found!");
@@ -71,8 +80,14 @@ public class Parser {
 		return new Parser(reader);
 	}
 
+	/**
+	 * Gets the parser URL.
+	 *
+	 * @param source the source
+	 * @return the parser URL
+	 */
 	// public static parser call back a URLParser.
-	public static Parser getParser(URL source) {
+	public static Parser getParserURL(URL source) {
 
 		BufferedReader reader = null;
 
@@ -84,8 +99,13 @@ public class Parser {
 
 		return new Parser(reader);
 	}
-	
-	
+
+	/**
+	 * Convert stream to string.
+	 *
+	 * @param is the is
+	 * @return the string
+	 */
 	public static String convertStreamToString(InputStream is) {
 		@SuppressWarnings("resource")
 		Scanner s = new Scanner(is).useDelimiter("\\A");
@@ -110,6 +130,12 @@ public class Parser {
 		return frequencies;
 	}
 
+	/**
+	 * Gets the quadgram frequencies.
+	 *
+	 * @return the quadgram frequencies
+	 * @throws FileNotFoundException the file not found exception
+	 */
 	public static Map<String, Double> getQuadgramFrequencies() throws FileNotFoundException {
 		return getFrequencies("4grams.txt");
 	}
