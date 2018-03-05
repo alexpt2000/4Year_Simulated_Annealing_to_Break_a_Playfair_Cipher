@@ -57,7 +57,7 @@ public class FileManager {
 
 		SimulatedAnnealing simulatedAnnealing = new SimulatedAnnealing(50, 1, 5000);
 
-		PlayfairKey key = simulatedAnnealing.findKey(encryptText);
+		PlayfairKey key = simulatedAnnealing.findKey(encryptText.substring(0, 600));
 		Playfair playFair = new Playfair(key);
 		String plainText = playFair.decrypt(encryptText);
 

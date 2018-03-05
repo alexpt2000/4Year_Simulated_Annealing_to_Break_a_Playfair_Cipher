@@ -15,8 +15,9 @@ public class test {
 	public static void main(String[] args) throws IOException, InterruptedException {
 		
 	
-		String fileName = "TheHobbitCypher.txt";
+		//String fileName = "TheHobbitCypher.txt";
 		// String fileName = "Tips.txt";
+		String fileName = "_encryptedMSG.txt";
 		
 		Parser parser = Parser.getParserFile(new File(fileName));
 		

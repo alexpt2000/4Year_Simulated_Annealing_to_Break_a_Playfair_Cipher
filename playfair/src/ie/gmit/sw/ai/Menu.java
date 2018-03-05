@@ -147,8 +147,8 @@ public class Menu {
 		System.out.println("Decrypt or Encrypt");
 		System.out.println("---------------------------------");
 
-		System.out.println("\n(1) Decrypt file (Break KEY).");
-		System.out.println("(2) Decrypt file (With KEY).");
+		System.out.println("\n(1) Decrypt file (Playfair cipher).");
+		System.out.println("(2) Decrypt file.");
 		System.out.println("(3) Encrypt file.");
 		System.out.println("\n(4) Return to main menu.");
 	}
