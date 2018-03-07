@@ -2,6 +2,8 @@ package ie.gmit.sw.ai;
 
 import java.io.IOException;
 
+import ie.gmit.sw.ai.file.FileManager;
+
 /**
  * The Class CipherBreaker.
  * 
@@ -17,8 +19,7 @@ import java.io.IOException;
  * answer.
  * 
  * 
- * Ref. 
- * https://github.com/ugljesas/playfair
+ * Ref. https://github.com/ugljesas/playfair
  * 
  * 
  * @author Alexander Souza
@@ -40,51 +41,81 @@ public class CipherBreaker {
 	 */
 	public static void main(String[] parameter) throws IOException, InterruptedException {
 
-		if (parameter.length == 0) {
-			// Object Menu, start the menu.
-			Menu menu = new Menu();// Instantiate Menu.
-			menu.start();
-
-			// Samplas URL docs
-			// http://www.textfiles.com/etext/MODERN/zen10.txt
-			// http://www.textfiles.com/etext/MODERN/hckr_hnd.txt
-		}
+		// Samples URL docs
+		// http://www.textfiles.com/etext/MODERN/zen10.txt
+		// http://www.textfiles.com/etext/MODERN/hckr_hnd.txt
 		
-		else if (parameter[0].equals("-help")) {
-			System.out.println("\nUsage:  CipherBreaker COMMAND \n"
-					+ "\nOptions:"
-					+ "\n	-dp		Decrypt file (Playfair cipher)"
-					+ "\n	-d		Decrypt file"
-					+ "\n	-e		Encrypt file");
-			
-			//System.out.println("\nRun 'CipherBreaker -help' for more information.");
-			System.out.println("\nRun 'java -cp ./playfair.jar ie.gmit.sw.ai.CipherBreaker -dp filename' for Decrypt file (Playfair cipher).");
-			System.out.println("Run 'java -cp ./playfair.jar ie.gmit.sw.ai.CipherBreaker -d filename key' for Decrypt file.");
-			System.out.println("Run 'java -cp ./playfair.jar ie.gmit.sw.ai.CipherBreaker -e filename key' for Encrypt file.");
-		}
-		
-		
-			
 		try {
-			if (parameter[0].equals("-dp") && !parameter[1].isEmpty()) {
-			System.out.println("Funcionou.: " + parameter[0] + " - " + parameter[1]);
+			if (parameter.length == 0) {
+				// Object Menu, start the menu.
+				Menu menu = new Menu();// Instantiate Menu.
+				menu.start();
 			}
-			
+
+			/*
+			 * Takes parameter:
+			 *
+			 * parameter[0] = COMMAND 
+			 * parameter[1] = filename 
+			 * parameter[2] = key
+			 *
+			 */
+			else if (parameter[0].toUpperCase().equals("-HELP")) {
+				System.out.println("\nUsage:  CipherBreaker COMMAND \n"
+						+ "\nOptions:"
+						+ "\n	-dp		Decrypt file/URL (Playfair cipher)"
+						+ "\n	-d		Decrypt file/URL"
+						+ "\n	-e		Encrypt file/URL");
+				
+				System.out.println("\nDecrypt file (Playfair cipher).");
+				System.out.println("	java -cp ./playfair.jar ie.gmit.sw.ai.CipherBreaker -dp <FILENAME>");
+				
+				System.out.println("\nDecrypt file.");
+				System.out.println("	java -cp ./playfair.jar ie.gmit.sw.ai.CipherBreaker -d <FILENAME> <KEY>");
+				
+				System.out.println("\nEncrypt file.");
+				System.out.println("	java -cp ./playfair.jar ie.gmit.sw.ai.CipherBreaker -e <FILENAME> <KEY>");
+			}
+
+			// Decrypt with Playfair cipher
+			else if (parameter[0].toUpperCase().equals("-DP")) {
+
+				if (!FileManager.validateFile(parameter[1])) {
+					System.out.println("\nFile/URL not found, try again!");
+				} else {
+					FileManager.ForceDecryptParsingFile(parameter[1]);
+				}
+
+			}
+
+			// Decrypt the file with KEY
+			else if (parameter[0].toUpperCase().equals("-D")) {
+
+				if (!FileManager.validateFile(parameter[1])) {
+					System.out.println("\nFile/URL not found, try again!");
+				} else {
+					FileManager.DecryptParsingFile(parameter[1], parameter[2]);
+				}
+
+			}
+
+			// Encrypt the file with KEY
+			else if (parameter[0].toUpperCase().equals("-E")) {
+				if (!FileManager.validateFile(parameter[1])) {
+					System.out.println("\nFile/URL not found, try again!");
+				} else {
+					FileManager.EncryptParsingFile(parameter[1], parameter[2]);
+				}
+
+			}
+
 			else {
 				System.out.println("\nRun 'java -cp ./playfair.jar ie.gmit.sw.ai.CipherBreaker -help' for more information.");
 			}
-			
+
 		} catch (java.lang.ArrayIndexOutOfBoundsException e) {
 			System.out.println("\nRun 'java -cp ./playfair.jar ie.gmit.sw.ai.CipherBreaker -help' for more information.");
-			//e.printStackTrace();
 		}
-		
-		
-		
-
-		
-		
-
 
 	}
 
