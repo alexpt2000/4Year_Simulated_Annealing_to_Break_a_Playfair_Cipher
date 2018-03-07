@@ -1,13 +1,11 @@
 
 package ie.gmit.sw.ai;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 import ie.gmit.sw.ai.file.FileManager;
-import ie.gmit.sw.ai.file.Parser;
 
 /**
  * The Class Menu.
@@ -17,10 +15,10 @@ public class Menu {
 
 	private static Scanner in = new Scanner(System.in);
 
-	private static File pathToFile;
+	//private static File pathToFile;
 
 	private static String keyword, file;
-	private static Parser parser = null;
+	//private static Parser parser = null;
 
 	private static boolean keepRunningKey = true;
 	private static boolean keepRunningEncDec = true;
@@ -31,8 +29,10 @@ public class Menu {
 	/**
 	 * Start.
 	 *
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 * @throws InterruptedException the interrupted exception
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 * @throws InterruptedException
+	 *             the interrupted exception
 	 */
 	public void start() throws IOException, InterruptedException {
 
@@ -174,16 +174,16 @@ public class Menu {
 	 * Show logo.
 	 */
 	public void showLogo() {
-		
+
 		System.out.println("  _____   _______                 _____    __   __   _______  _______ ");
 		System.out.println(" (_____) (_______)               (_____)  (__)_(__) (_______)(__ _ __)");
-		System.out.println("(_)___(_)   (_)       ______    (_)  ___ (_) (_) (_)   (_)      (_)");   
-		System.out.println("(_______)   (_)      (______)   (_) (___)(_) (_) (_)   (_)      (_) ");  
-		System.out.println("(_)   (_) __(_)__               (_)___(_)(_)     (_) __(_)__    (_)");   
-		System.out.println("(_)   (_)(_______)               (_____) (_)     (_)(_______)   (_)");   
+		System.out.println("(_)___(_)   (_)       ______    (_)  ___ (_) (_) (_)   (_)      (_)");
+		System.out.println("(_______)   (_)      (______)   (_) (___)(_) (_) (_)   (_)      (_) ");
+		System.out.println("(_)   (_) __(_)__               (_)___(_)(_)     (_) __(_)__    (_)");
+		System.out.println("(_)   (_)(_______)               (_____) (_)     (_)(_______)   (_)");
 		System.out.println("\nSimulated Annealing to Break a Playfair Cipher");
-//		System.out.println(" by Alexander Souza - G00317835@gmit.ie");
-		
+		// System.out.println(" by Alexander Souza - G00317835@gmit.ie");
+
 	}
 
 }

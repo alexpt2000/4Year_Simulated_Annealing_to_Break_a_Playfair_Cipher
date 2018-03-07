@@ -27,6 +27,9 @@ public class CipherBreaker {
 
 	/**
 	 * The main method.
+	 * 
+	 * Ref.
+	 * https://stackoverflow.com/questions/890966/what-is-string-args-parameter-in-main-method-java
 	 *
 	 * @param args
 	 *            the arguments
@@ -35,15 +38,53 @@ public class CipherBreaker {
 	 * @throws InterruptedException
 	 *             the interrupted exception
 	 */
-	public static void main(String[] args) throws IOException, InterruptedException {
+	public static void main(String[] parameter) throws IOException, InterruptedException {
 
-		// Object Menu, start the menu.
-		Menu menu = new Menu();// Instantiate Menu.
-		menu.start();
+		if (parameter.length == 0) {
+			// Object Menu, start the menu.
+			Menu menu = new Menu();// Instantiate Menu.
+			menu.start();
 
-		// Samplas URL docs
-		// http://www.textfiles.com/etext/MODERN/zen10.txt
-		// http://www.textfiles.com/etext/MODERN/hckr_hnd.txt
+			// Samplas URL docs
+			// http://www.textfiles.com/etext/MODERN/zen10.txt
+			// http://www.textfiles.com/etext/MODERN/hckr_hnd.txt
+		}
+		
+		else if (parameter[0].equals("-help")) {
+			System.out.println("\nUsage:  CipherBreaker COMMAND \n"
+					+ "\nOptions:"
+					+ "\n	-dp		Decrypt file (Playfair cipher)"
+					+ "\n	-d		Decrypt file"
+					+ "\n	-e		Encrypt file");
+			
+			//System.out.println("\nRun 'CipherBreaker -help' for more information.");
+			System.out.println("\nRun 'java -cp ./playfair.jar ie.gmit.sw.ai.CipherBreaker -dp filename' for Decrypt file (Playfair cipher).");
+			System.out.println("Run 'java -cp ./playfair.jar ie.gmit.sw.ai.CipherBreaker -d filename key' for Decrypt file.");
+			System.out.println("Run 'java -cp ./playfair.jar ie.gmit.sw.ai.CipherBreaker -e filename key' for Encrypt file.");
+		}
+		
+		
+			
+		try {
+			if (parameter[0].equals("-dp") && !parameter[1].isEmpty()) {
+			System.out.println("Funcionou.: " + parameter[0] + " - " + parameter[1]);
+			}
+			
+			else {
+				System.out.println("\nRun 'java -cp ./playfair.jar ie.gmit.sw.ai.CipherBreaker -help' for more information.");
+			}
+			
+		} catch (java.lang.ArrayIndexOutOfBoundsException e) {
+			System.out.println("\nRun 'java -cp ./playfair.jar ie.gmit.sw.ai.CipherBreaker -help' for more information.");
+			//e.printStackTrace();
+		}
+		
+		
+		
+
+		
+		
+
 
 	}
 
