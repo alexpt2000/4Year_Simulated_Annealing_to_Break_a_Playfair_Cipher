@@ -2,6 +2,12 @@
 ## Artificial Intelligence (2018)
 ### Simulated Annealing to Break a Playfair Cipher
 
+The field of cryptanalysis is concerned with the study of ciphers, having as its objective the
+identification of weaknesses within a cryptographic system that may be exploited to convert
+encrypted data (cipher-text) into unencrypted data (plain-text). Whether using symmetric or
+asymmetric techniques, cryptanalysis assumes no knowledge of the correct cryptographic key
+or even the cryptographic algorithm being used.
+
 ## Use CipherBreaker command line
 ```
 java -cp ./playfair.jar ie.gmit.sw.ai.CipherBreaker -help

@@ -55,14 +55,23 @@ public class SimulatedAnnealing {
 		double bestFitness = Double.NEGATIVE_INFINITY;
 
 		PlayfairKey parent = PlayfairKey.getRandomKey();
+		PlayfairKey tempParent = PlayfairKey.getRandomKey();
 		PlayfairKey bestKey = null;
 		Playfair playfair = new Playfair(parent);
 		double parentFitness = getFitness(cipherText, playfair);
 
 		int progressBar = 0;
 
+		int count = 0;
+		
 		for (double temp = maxTemp; temp > 0; temp -= step) {
 
+			//parent
+			
+			//System.out.println(bestKey);
+			
+
+			
 			progressBar += 2;
 
 			if (progressBar % 3 == 0) {
@@ -92,6 +101,27 @@ public class SimulatedAnnealing {
 					bestKey = parent;
 				}
 			}
+			
+			
+			if (count == 0) {
+				tempParent = parent;
+				// System.out.println("Set new value....");
+				count++;
+			}
+			else if (tempParent.equals(parent)) {
+				// System.out.println("Detect iqual....");
+				count++;
+			}
+			else {
+				count = 0;
+			}
+			
+			if (count > 5) {
+				// System.out.println("Best key....");
+				temp = -1000;
+
+			}
+			
 		}
 		return bestKey;
 	}

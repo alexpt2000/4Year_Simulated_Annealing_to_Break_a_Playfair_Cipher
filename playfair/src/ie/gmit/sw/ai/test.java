@@ -15,19 +15,19 @@ public class test {
 	public static void main(String[] args) throws IOException, InterruptedException {
 		
 	
-		//String fileName = "TheHobbitCypher.txt";
-		// String fileName = "Tips.txt";
-		String fileName = "_encryptedMSG.txt";
+		// String fileName = "TheHobbitCypher.txt";
+		String fileName = "Tips.txt";
+		//String fileName = "_encryptedMSG.txt";
 		
 		Parser parser = Parser.getParserFile(new File(fileName));
 		
 		String encryptText = parser.parse();
 
 		
-		SimulatedAnnealing simulatedAnnealing = new SimulatedAnnealing(50, 1, 5000);
+		SimulatedAnnealing simulatedAnnealing = new SimulatedAnnealing(50, 1, 15000); //double maxTemp, double step, int iterationsOnTemp
 
 		// Simulate just a limited numbers of char
-		PlayfairKey key = simulatedAnnealing.findKey(encryptText.substring(0, 600));
+		PlayfairKey key = simulatedAnnealing.findKey(encryptText.substring(0, 500));
 		
 		
 		
