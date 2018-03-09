@@ -52,20 +52,22 @@ public class FileManager {
 	 * @throws InterruptedException the interrupted exception
 	 */
 	public static void ForceDecryptParsingFile(String file) throws IOException, InterruptedException {
+		
+		// Record the start time
+		long startTime = System.currentTimeMillis();
+		
 		parser = Parser.getParserFile(new File(file));
 		encryptText = parser.parse();
 
-		SimulatedAnnealing simulatedAnnealing = new SimulatedAnnealing(50, 1, 5000);
+		SimulatedAnnealing simulatedAnnealing = new SimulatedAnnealing(50, 1, 15000);
 
-		PlayfairKey key = simulatedAnnealing.findKey(encryptText.substring(0, 600));
+		PlayfairKey key = simulatedAnnealing.findKey(encryptText.substring(0, 500));
 		Playfair playFair = new Playfair(key);
 		String plainText = playFair.decrypt(encryptText);
 
-		System.out.println(
-				"\n------------------------------------------------------------------------------------------");
-		System.out.println("Sample output result.: " + plainText.substring(0, 60) + "...");
-		System.out
-				.println("------------------------------------------------------------------------------------------");
+		System.out.println("\n------------------------------------------------------------------------------------------");
+		System.out.println("Sample output result.: " + plainText.substring(0, 64) + "...");
+		System.out.println("------------------------------------------------------------------------------------------");
 
 		String fileName = "_decryptedMSG.txt";
 		path = "./" + fileName;
@@ -80,6 +82,11 @@ public class FileManager {
 			// Print into a file
 			pw.println(plainText);
 			System.out.println("Decrypt saved on file name: " + fileName);
+			
+			// Stop record the time and print on screen
+			long stopTime = System.currentTimeMillis();
+			long elapsedTime = stopTime - startTime;
+			System.out.println("In " + ((elapsedTime)/1000) + " Seconds.");
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -112,7 +119,14 @@ public class FileManager {
 
 		try (PrintWriter pw = new PrintWriter(path)) {
 
-			pw.println(playfair.encrypt(encryptText));
+			plainText = playfair.encrypt(encryptText);
+			
+			pw.println(plainText);
+			
+			System.out.println("\n------------------------------------------------------------------------------------------");
+			System.out.println("Sample output result.: " + plainText.substring(0, 64) + "...");
+			System.out.println("------------------------------------------------------------------------------------------");
+			
 			System.out.println("Decrypt saved on file name: " + fileName);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -158,7 +172,15 @@ public class FileManager {
 		}
 
 		try (PrintWriter pw = new PrintWriter(path)) {
-			pw.println(playfair.encrypt(plainText));
+			
+			encryptText = playfair.encrypt(plainText);
+			
+			pw.println(encryptText);
+			
+			System.out.println("\n------------------------------------------------------------------------------------------");
+			System.out.println("Sample output result.: " + encryptText.substring(0, 64) + "...");
+			System.out.println("------------------------------------------------------------------------------------------");
+			
 			System.out.println("Encrypt saved on file name: " + fileName);
 
 		} catch (IOException e) {

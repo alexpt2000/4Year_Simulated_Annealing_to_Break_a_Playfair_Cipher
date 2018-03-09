@@ -66,17 +66,10 @@ public class SimulatedAnnealing {
 		
 		for (double temp = maxTemp; temp > 0; temp -= step) {
 
-			//parent
-			
-			//System.out.println(bestKey);
-			
-
-			
 			progressBar += 2;
 
 			if (progressBar % 3 == 0) {
 				System.out.print(progressBar + "% ");
-
 			}
 
 			for (int it = 0; it < iterationsOnTemp; it++) {

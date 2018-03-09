@@ -14,9 +14,10 @@ public class test {
 
 	public static void main(String[] args) throws IOException, InterruptedException {
 		
-	
-		// String fileName = "TheHobbitCypher.txt";
-		String fileName = "Tips.txt";
+		long startTime = System.currentTimeMillis();
+		
+		String fileName = "TheHobbitCypher.txt";
+		// String fileName = "Tips.txt";
 		//String fileName = "_encryptedMSG.txt";
 		
 		Parser parser = Parser.getParserFile(new File(fileName));
@@ -36,7 +37,7 @@ public class test {
 
 		System.out.println("\n------------------------------------------------------------------------------------------");
 		System.out.println("Sample output result.: " + plainText.substring(0, 100) + "...");
-		System.out.println("Sample output result.: " + plainText.substring(600, 700) + "...");
+		//System.out.println("Sample output result.: " + plainText.substring(600, 700) + "...");
 		//System.out.println(plainText.replace("X", ""));
 		System.out.println("------------------------------------------------------------------------------------------");
 		
@@ -53,6 +54,10 @@ public class test {
 			// Print into a file
 			pw.println(plainText);
 			System.out.println("Decrypt saved on file name: " + saveFileName);
+			
+		      long stopTime = System.currentTimeMillis();
+		      long elapsedTime = stopTime - startTime;
+		      System.out.println("In " + ((elapsedTime)/1000) + " Seconds");
 
 		} catch (IOException e) {
 			e.printStackTrace();

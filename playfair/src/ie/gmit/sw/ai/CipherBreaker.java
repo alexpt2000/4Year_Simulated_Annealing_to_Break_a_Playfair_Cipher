@@ -45,6 +45,9 @@ public class CipherBreaker {
 		// http://www.textfiles.com/etext/MODERN/zen10.txt
 		// http://www.textfiles.com/etext/MODERN/hckr_hnd.txt
 		
+		// War and Peace by graf Leo Tolstoy
+		// http://www.gutenberg.org/files/2600/2600-0.txt
+		
 		try {
 			if (parameter.length == 0) {
 				// Object Menu, start the menu.
