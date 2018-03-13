@@ -22,6 +22,7 @@ This application consists of two ways to execute:
 
 
 ## Use CipherBreaker command line
+![Screencast](Screencast/command_playfair.gif)
 
 Get help with the options available to the user.
 ```
@@ -46,6 +47,8 @@ Encrypt file.
 ```
 
 ## Use CipherBreaker as UI
+
+![Screencast](Screencast/UI_playfair.gif)
 
 For the user to have access to the UI, just run the application without passing any parameter.
 ```

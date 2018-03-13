@@ -74,7 +74,7 @@ public class SimulatedAnnealing {
 
 			// to make the progress bar smaller, just take the remainder
 			if (progressBar % 3 == 0) {
-				System.out.print(progressBar + "% ");
+				// System.out.print(progressBar + "% ");
 			}
 
 			for (int it = 0; it < iterationsOnTemp; it++) {
@@ -89,6 +89,7 @@ public class SimulatedAnnealing {
 					takeChild = true;
 				else if (Math.random() < Math.exp(df / temp))
 					takeChild = true;
+				
 				if (takeChild) {
 
 					parentFitness = childFitness;
