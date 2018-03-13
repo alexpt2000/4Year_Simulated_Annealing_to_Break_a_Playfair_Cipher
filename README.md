@@ -8,7 +8,22 @@ encrypted data (cipher-text) into unencrypted data (plain-text). Whether using s
 asymmetric techniques, cryptanalysis assumes no knowledge of the correct cryptographic key
 or even the cryptographic algorithm being used.
 
+### The application
+
+The application will allow the user to make the encryption and decryption of documents of type txt, from a key provided by the user.
+
+The user can also decrypt using a simulated annealing algorithm for breaking cyphers, the user just  enter the name of the text file to be decrypt.
+
+This application consists of two ways to execute:
+
+- Through command line in which the user can execute the application passing parameter directly through the command line.
+
+- Through a user-friendly interface, the user can also access all system options through menus.
+
+
 ## Use CipherBreaker command line
+
+Get help with the options available to the user.
 ```
 java -cp ./playfair.jar ie.gmit.sw.ai.CipherBreaker -help
 ```
@@ -31,6 +46,8 @@ Encrypt file.
 ```
 
 ## Use CipherBreaker as UI
+
+For the user to have access to the UI, just run the application without passing any parameter.
 ```
 java -cp ./playfair.jar ie.gmit.sw.ai.CipherBreaker
 ```
@@ -81,6 +98,7 @@ Decrypt or Encrypt
 Sample output result.: THEREWILLBEFIVEQUESTIONSONTHEXXAMPAPERTHISYEARSTOPYOUAREREQU...
 ------------------------------------------------------------------------------------------
 Decrypt saved on file name: _decryptedMSG.txt
+In 54 Seconds.
 Break decrypt is Finish...
 
 Press ENTER to return to Main Menu...

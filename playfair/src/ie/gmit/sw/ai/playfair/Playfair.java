@@ -11,6 +11,9 @@ import java.util.List;
  * http://crypto.interactive-maths.com/playfair-cipher.html
  * http://www.sanfoundry.com/java-program-decode-message-encoded-using-playfair-cipher/
  * 
+ *  * Adapted from:
+ * https://github.com/ugljesas/playfair
+ * 
  * 
  * @author Alexander Souza
  * 
@@ -23,6 +26,8 @@ public class Playfair {
 	 * Instantiates a new playfair.
 	 *
 	 * @param key the key
+	 * 
+	 * 
 	 */
 	public Playfair(PlayfairKey key) {
 		this.key = key;

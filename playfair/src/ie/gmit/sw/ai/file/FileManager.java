@@ -15,7 +15,7 @@ import ie.gmit.sw.ai.playfair.SimulatedAnnealing;
 /**
  * The Class FileManager.
  */
-public class FileManager {
+public class FileManager implements AccessFileManager {
 
 	private static Parser parser = null;
 	private static String plainText;
@@ -27,7 +27,8 @@ public class FileManager {
 	 *
 	 * @return the string
 	 */
-	public static String listFilesScreen() {
+	@Override
+	public String listFilesScreen() {
 
 		String menu = "";
 
@@ -51,7 +52,8 @@ public class FileManager {
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 * @throws InterruptedException the interrupted exception
 	 */
-	public static void ForceDecryptParsingFile(String file) throws IOException, InterruptedException {
+	@Override
+	public void ForceDecryptParsingFile(String file) throws IOException, InterruptedException {
 		
 		// Record the start time
 		long startTime = System.currentTimeMillis();
@@ -65,10 +67,12 @@ public class FileManager {
 		Playfair playFair = new Playfair(key);
 		String plainText = playFair.decrypt(encryptText);
 
+		// print some sample
 		System.out.println("\n------------------------------------------------------------------------------------------");
 		System.out.println("Sample output result.: " + plainText.substring(0, 64) + "...");
 		System.out.println("------------------------------------------------------------------------------------------");
 
+		// name of the output file name
 		String fileName = "_decryptedMSG.txt";
 		path = "./" + fileName;
 
@@ -79,7 +83,7 @@ public class FileManager {
 		}
 
 		try (PrintWriter pw = new PrintWriter(path)) {
-			// Print into a file
+			// Print into a file (save)
 			pw.println(plainText);
 			System.out.println("Decrypt saved on file name: " + fileName);
 			
@@ -102,7 +106,8 @@ public class FileManager {
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 * @throws InterruptedException the interrupted exception
 	 */
-	public static void DecryptParsingFile(String file, String keyword) throws IOException, InterruptedException {
+	@Override
+	public void DecryptParsingFile(String file, String keyword) throws IOException, InterruptedException {
 		parser = Parser.getParserFile(new File(file));
 		encryptText = parser.parse();
 
@@ -117,11 +122,16 @@ public class FileManager {
 			e1.printStackTrace();
 		}
 
+		
 		try (PrintWriter pw = new PrintWriter(path)) {
 
+			
 			plainText = playfair.encrypt(encryptText);
 			
+			// save into a file
 			pw.println(plainText);
+			
+			// Print a text sample
 			
 			System.out.println("\n------------------------------------------------------------------------------------------");
 			System.out.println("Sample output result.: " + plainText.substring(0, 64) + "...");
@@ -142,14 +152,10 @@ public class FileManager {
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 * @throws InterruptedException the interrupted exception
 	 */
-	public static void EncryptParsingFile(String file, String keyword) throws IOException, InterruptedException {
+	@Override
+	public void EncryptParsingFile(String file, String keyword) throws IOException, InterruptedException {
 
 		if (file.contains("http://") || file.contains("https://")) {
-
-			// URL connection = new URL(file);
-
-			// BufferedReader br = new BufferedReader(new
-			// InputStreamReader(connection.openStream()));
 
 			parser = Parser.getParserURL(new URL(file));
 
@@ -161,7 +167,7 @@ public class FileManager {
 
 		Playfair playfair = new Playfair(keyword);
 
-		// Declare variable
+		// name of the file
 		String fileName = "_encryptedMSG.txt";
 		path = "./" + fileName;
 
@@ -175,8 +181,10 @@ public class FileManager {
 			
 			encryptText = playfair.encrypt(plainText);
 			
+			// save into a file
 			pw.println(encryptText);
 			
+			// print a result
 			System.out.println("\n------------------------------------------------------------------------------------------");
 			System.out.println("Sample output result.: " + encryptText.substring(0, 64) + "...");
 			System.out.println("------------------------------------------------------------------------------------------");
@@ -196,15 +204,13 @@ public class FileManager {
 	 * @return the boolean
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
-	public static Boolean validateFile(String file) throws IOException {
+	@Override
+	public Boolean validateFile(String file) throws IOException {
 
 		boolean keepRunningEncDec = true;
 		// Checks if the file is a URL and if is need contain http:// or https://. If
 		// contain will execute the try.
 		if (file.contains("http://") || file.contains("https://")) {
-			// I use this URL to test if the program it's working
-			// http://www.textfiles.com/etext/MODERN/zen10.txt
-			// http://www.textfiles.com/etext/MODERN/hckr_hnd.txt
 
 			try {// Instantiate the variable URL.
 				URL url = new URL(file);

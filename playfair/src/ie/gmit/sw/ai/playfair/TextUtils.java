@@ -9,7 +9,8 @@ import java.util.List;
  * Ref.
  * https://github.com/ugljesas/playfair/blob/master/playfair/src/utils/TextUtils.java
  * 
- * 
+ *  * Adapted from:
+ * https://github.com/ugljesas/playfair
  * 
  * @author Alexander Souza
  */

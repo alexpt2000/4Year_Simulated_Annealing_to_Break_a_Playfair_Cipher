@@ -12,6 +12,9 @@ import ie.gmit.sw.ai.frequency.QuadgramFrequencyRepository;
  * https://github.com/abrown/aima-java/blob/master/aima-core/src/main/java/aima/core/search/local/SimulatedAnnealingSearch.java
  * https://github.com/ugljesas/playfair/blob/master/playfair/src/playfair/breaking/SimulatedAnnealing.java
  * 
+ *  * Adapted from:
+ * https://github.com/ugljesas/playfair
+ * 
  * @author Alexander Souza
  */
 public class SimulatedAnnealing {
@@ -60,14 +63,16 @@ public class SimulatedAnnealing {
 		Playfair playfair = new Playfair(parent);
 		double parentFitness = getFitness(cipherText, playfair);
 
-		int progressBar = 0;
+		
+		int progressBar = 0; // Progress bar initial value
 
-		int count = 0;
+		int count = 0; // count of frequencies of equal key combination
 		
 		for (double temp = maxTemp; temp > 0; temp -= step) {
 
-			progressBar += 2;
+			progressBar += 2; // add two for each loop
 
+			// to make the progress bar smaller, just take the remainder
 			if (progressBar % 3 == 0) {
 				System.out.print(progressBar + "% ");
 			}
@@ -95,14 +100,15 @@ public class SimulatedAnnealing {
 				}
 			}
 			
-			
+			// this is control for each time found a equal key
+			// will interrupt the loop if frequency is more than 5
 			if (count == 0) {
 				tempParent = parent;
 				// System.out.println("Set new value....");
 				count++;
 			}
 			else if (tempParent.equals(parent)) {
-				// System.out.println("Detect iqual....");
+				// System.out.println("Detect equal....");
 				count++;
 			}
 			else {
@@ -111,7 +117,7 @@ public class SimulatedAnnealing {
 			
 			if (count > 5) {
 				// System.out.println("Best key....");
-				temp = -1000;
+				temp = -1000; // send a any negative value to interrupt
 
 			}
 			

@@ -20,6 +20,11 @@ import java.util.Scanner;
 
 /**
  * The Class Parser.
+ * 
+ * Adapted from:
+ * https://github.com/ugljesas/playfair
+ * 
+ * @author Alexander Souza
  */
 //This class parse text and uses BufferedReader to read what it is inside the file.
 public class Parser {

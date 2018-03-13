@@ -9,6 +9,11 @@ import ie.gmit.sw.ai.playfair.TextUtils;
 
 /**
  * The Class QuadgramFrequencyRepository.
+ * 
+ * Adapted from:
+ * https://github.com/ugljesas/playfair
+ * 
+ * @author Alexander Souza
  */
 public class QuadgramFrequencyRepository {
 	private double minValue = Double.POSITIVE_INFINITY;

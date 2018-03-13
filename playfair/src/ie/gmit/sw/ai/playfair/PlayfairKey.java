@@ -16,6 +16,9 @@ import java.util.TreeSet;
  * http://www.comscigate.com/HW/cs201/odd_solns/Ch16/ExP16_5/PlayfairCipher.java
  * 
  * 
+ *  * Adapted from:
+ * https://github.com/ugljesas/playfair
+ * 
  * @author Alexander Souza
  */
 public class PlayfairKey {

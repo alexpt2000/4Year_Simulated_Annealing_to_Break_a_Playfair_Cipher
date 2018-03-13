@@ -2,6 +2,7 @@ package ie.gmit.sw.ai;
 
 import java.io.IOException;
 
+import ie.gmit.sw.ai.file.AccessFileManager;
 import ie.gmit.sw.ai.file.FileManager;
 
 /**
@@ -39,6 +40,9 @@ public class CipherBreaker {
 	 * @throws InterruptedException
 	 *             the interrupted exception
 	 */
+	
+	private static AccessFileManager fileManager = new FileManager();
+	
 	public static void main(String[] parameter) throws IOException, InterruptedException {
 
 		// Samples URL docs
@@ -48,10 +52,14 @@ public class CipherBreaker {
 		// War and Peace by graf Leo Tolstoy
 		// http://www.gutenberg.org/files/2600/2600-0.txt
 		
+		
+		/*
+		 * UI interface for the user select the files on the list
+		 * */
 		try {
 			if (parameter.length == 0) {
 				// Object Menu, start the menu.
-				Menu menu = new Menu();// Instantiate Menu.
+				AccessMenu menu = new Menu();// Instantiate Menu.
 				menu.start();
 			}
 
@@ -83,10 +91,10 @@ public class CipherBreaker {
 			// Decrypt with Playfair cipher
 			else if (parameter[0].toUpperCase().equals("-DP")) {
 
-				if (!FileManager.validateFile(parameter[1])) {
+				if (!fileManager.validateFile(parameter[1])) {
 					System.out.println("\nFile/URL not found, try again!");
 				} else {
-					FileManager.ForceDecryptParsingFile(parameter[1]);
+					fileManager.ForceDecryptParsingFile(parameter[1]);
 				}
 
 			}
@@ -94,20 +102,20 @@ public class CipherBreaker {
 			// Decrypt the file with KEY
 			else if (parameter[0].toUpperCase().equals("-D")) {
 
-				if (!FileManager.validateFile(parameter[1])) {
+				if (!fileManager.validateFile(parameter[1])) {
 					System.out.println("\nFile/URL not found, try again!");
 				} else {
-					FileManager.DecryptParsingFile(parameter[1], parameter[2]);
+					fileManager.DecryptParsingFile(parameter[1], parameter[2]);
 				}
 
 			}
 
 			// Encrypt the file with KEY
 			else if (parameter[0].toUpperCase().equals("-E")) {
-				if (!FileManager.validateFile(parameter[1])) {
+				if (!fileManager.validateFile(parameter[1])) {
 					System.out.println("\nFile/URL not found, try again!");
 				} else {
-					FileManager.EncryptParsingFile(parameter[1], parameter[2]);
+					fileManager.EncryptParsingFile(parameter[1], parameter[2]);
 				}
 
 			}

@@ -5,13 +5,14 @@ import java.io.IOException;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
+import ie.gmit.sw.ai.file.AccessFileManager;
 import ie.gmit.sw.ai.file.FileManager;
 
 /**
  * The Class Menu.
  */
 // This class shows the menu options.
-public class Menu {
+public class Menu implements AccessMenu {
 
 	private static Scanner in = new Scanner(System.in);
 
@@ -22,18 +23,16 @@ public class Menu {
 
 	private static boolean keepRunningKey = true;
 	private static boolean keepRunningEncDec = true;
+	
+	private static AccessFileManager fileManager = new FileManager();
 
 	/** The user choice. */
 	int userChoice;
 
-	/**
-	 * Start.
-	 *
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred.
-	 * @throws InterruptedException
-	 *             the interrupted exception
+	/* (non-Javadoc)
+	 * @see ie.gmit.sw.ai.AccessMenu#start()
 	 */
+	@Override
 	public void start() throws IOException, InterruptedException {
 
 		while (keepRunningKey) {
@@ -50,7 +49,7 @@ public class Menu {
 
 				if (selection == 1) {
 
-					FileManager.ForceDecryptParsingFile(file);
+					fileManager.ForceDecryptParsingFile(file);
 
 					System.out.println("Break decrypt is Finish...");
 					System.out.println("\nPress ENTER to return to Main Menu...");
@@ -69,7 +68,7 @@ public class Menu {
 						System.exit(0);
 					}
 
-					FileManager.DecryptParsingFile(file, keyword);
+					fileManager.DecryptParsingFile(file, keyword);
 
 					System.out.println("\nDecrypt is Finish...");
 					System.out.println("\nPress ENTER to return to Main Menu...");
@@ -88,7 +87,7 @@ public class Menu {
 						System.exit(0);
 					}
 
-					FileManager.EncryptParsingFile(file, keyword);
+					fileManager.EncryptParsingFile(file, keyword);
 
 					System.out.println("\nEncrypt is Finish...");
 					System.out.println("\nPress ENTER to return to Main Menu...");
@@ -108,7 +107,11 @@ public class Menu {
 
 	}
 
-	private void showOptionsKey() throws IOException, InterruptedException {
+	/* (non-Javadoc)
+	 * @see ie.gmit.sw.ai.AccessMenu#showOptionsKey()
+	 */
+	@Override
+	public void showOptionsKey() throws IOException, InterruptedException {
 		clearConsole();
 		showLogo();
 
@@ -116,7 +119,7 @@ public class Menu {
 		System.out.println("    Files Availables");
 		System.out.println("---------------------------------");
 
-		String menu = FileManager.listFilesScreen();
+		String menu = fileManager.listFilesScreen();
 
 		System.out.println(menu);
 
@@ -132,7 +135,7 @@ public class Menu {
 			System.exit(0);
 		}
 
-		keepRunningEncDec = FileManager.validateFile(file);
+		keepRunningEncDec = fileManager.validateFile(file);
 
 		if (!keepRunningEncDec) {
 			System.out.println("\nFile/URL not found, try again!");
@@ -141,7 +144,11 @@ public class Menu {
 
 	}
 
-	private void showOptionsEncDec() {
+	/* (non-Javadoc)
+	 * @see ie.gmit.sw.ai.AccessMenu#showOptionsEncDec()
+	 */
+	@Override
+	public void showOptionsEncDec() {
 
 		System.out.println("\n---------------------------------");
 		System.out.println("Decrypt or Encrypt");
@@ -153,9 +160,10 @@ public class Menu {
 		System.out.println("\n(4) Return to main menu.");
 	}
 
-	/**
-	 * Clear console.
+	/* (non-Javadoc)
+	 * @see ie.gmit.sw.ai.AccessMenu#clearConsole()
 	 */
+	@Override
 	public void clearConsole() {
 		try {
 			final String os = System.getProperty("os.name");
@@ -170,9 +178,10 @@ public class Menu {
 		}
 	}
 
-	/**
-	 * Show logo.
+	/* (non-Javadoc)
+	 * @see ie.gmit.sw.ai.AccessMenu#showLogo()
 	 */
+	@Override
 	public void showLogo() {
 
 		System.out.println("  _____   _______                 _____    __   __   _______  _______ ");
