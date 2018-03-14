@@ -116,6 +116,12 @@ Decrypt saved on file name: _decryptedMSG.txt
 Decrypt is Finish...
 ```
 
+### Requirements
+#### Software
+- Java SE Development Kit (JDK) 8 or higher.
+#### Files
+- playfair.jar
+- 4grams.txt
 
 
 # Author
@@ -126,3 +132,6 @@ Decrypt is Finish...
 - https://github.com/alexpt2000gmit
 - https://github.com/alexpt2000
 - www.linkedin.com/in/alexander-souza-3a841539/
+
+# GitHub
+- https://github.com/alexpt2000gmit/4Year_Simulated_Annealing_to_Break_a_Playfair_Cipher
